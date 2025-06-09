@@ -1,31 +1,31 @@
-// Animated particles background
-function createParticles() {
-  const particlesContainer = document.getElementById("particles");
-  const particleCount = 50;
+// Função para criar partículas animadas de fundo
+function criarParticulas() {
+  const containerParticulas = document.getElementById("particulas");
+  const quantidadeParticulas = 30;
 
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement("div");
-    particle.classList.add("particle");
+  for (let i = 0; i < quantidadeParticulas; i++) {
+    const particula = document.createElement("div");
+    particula.classList.add("particula");
 
-    // Random size and position
-    const size = Math.random() * 4 + 1;
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
-    particle.style.left = Math.random() * 100 + "%";
-    particle.style.animationDelay = Math.random() * 20 + "s";
-    particle.style.animationDuration = Math.random() * 10 + 15 + "s";
+    // Tamanho e posição aleatórios
+    const tamanho = Math.random() * 3 + 1;
+    particula.style.width = tamanho + "px";
+    particula.style.height = tamanho + "px";
+    particula.style.left = Math.random() * 100 + "%";
+    particula.style.animationDelay = Math.random() * 25 + "s";
+    particula.style.animationDuration = Math.random() * 15 + 20 + "s";
 
-    particlesContainer.appendChild(particle);
+    containerParticulas.appendChild(particula);
   }
 }
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
+// Rolagem suave para links de navegação
+document.querySelectorAll('a[href^="#"]').forEach((ancora) => {
+  ancora.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
+    const alvo = document.querySelector(this.getAttribute("href"));
+    if (alvo) {
+      alvo.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -33,58 +33,57 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Fade in animation on scroll
-const observerOptions = {
+// Animação de aparição no scroll
+const opcesObservador = {
   root: null,
   rootMargin: "0px",
   threshold: 0.1,
 };
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
+const observador = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add("visivel");
     }
   });
-}, observerOptions);
+}, opcesObservador);
 
-document.querySelectorAll(".fade-in").forEach((el) => {
-  observer.observe(el);
+document.querySelectorAll(".aparecer-scroll").forEach((el) => {
+  observador.observe(el);
 });
 
-// Header background change on scroll
+// Mudança do fundo do cabeçalho no scroll
 window.addEventListener("scroll", () => {
-  const header = document.querySelector("header");
+  const cabecalho = document.querySelector(".cabecalho");
   if (window.scrollY > 100) {
-    header.style.background = "rgba(10, 14, 26, 0.95)";
+    cabecalho.style.background = "rgba(10, 10, 10, 0.98)";
   } else {
-    header.style.background = "rgba(10, 14, 26, 0.9)";
+    cabecalho.style.background = "rgba(15, 15, 15, 0.95)";
   }
 });
 
-// Initialize particles when page loads
-window.addEventListener("load", createParticles);
+// Inicializar partículas quando a página carregar
+window.addEventListener("load", criarParticulas);
 
-// Typing effect for hero subtitle (optional enhancement)
-function typeWriter(element, text, speed = 50) {
+// Efeito de digitação para o subtítulo (opcional)
+function efeitoDigitacao(elemento, texto, velocidade = 80) {
   let i = 0;
-  element.innerHTML = "";
-
-  function type() {
-    if (i < text.length) {
-      element.innerHTML += text.charAt(i);
+  elemento.innerHTML = "";
+  function digitar() {
+    if (i < texto.length) {
+      elemento.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(type, speed);
+      setTimeout(digitar, velocidade);
     }
   }
-  type();
+  digitar();
 }
 
-// Initialize typing effect
+// Inicializar efeito de digitação
 window.addEventListener("load", () => {
-  const subtitle = document.querySelector(".hero .subtitle");
-  const originalText = subtitle.textContent;
+  const subtitulo = document.querySelector(".secao-hero .subtitulo");
+  const textoOriginal = subtitulo.textContent;
   setTimeout(() => {
-    typeWriter(subtitle, originalText, 100);
-  }, 1000);
+    efeitoDigitacao(subtitulo, textoOriginal, 120);
+  }, 1500);
 });
